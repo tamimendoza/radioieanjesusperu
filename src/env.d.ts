@@ -22,6 +22,9 @@ interface ImportMetaEnv {
   readonly PUBLIC_FIREBASE_CLIENT_MEASUREMENT_ID: string;
 
   readonly PUBLIC_GOOGLE_RECAPTCHA_KEY: string;
+
+  readonly TURSO_DATABASE_URL: string;
+  readonly TURSO_AUTH_TOKEN: string;
 }
 
 interface ImportMeta {

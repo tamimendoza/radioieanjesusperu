@@ -1,9 +1,10 @@
+export const prerender = false;
+
 import type { APIRoute } from "astro";
 import { turso } from "../../turso";
 import { LibsqlError } from "@libsql/client";
 import { db } from "../../firebase/server";
 
-export const prerender = false;
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
 

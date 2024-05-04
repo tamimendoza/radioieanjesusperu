@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import type { ServiceAccount } from "firebase-admin";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getDatabaseWithUrl } from "firebase-admin/database";
