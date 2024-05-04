@@ -26,3 +26,4 @@ pnpm-debug.log*
 local.db
 local.db-shm
 local.db-wal
+pnpm-lock.yaml
