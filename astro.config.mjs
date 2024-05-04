@@ -8,5 +8,10 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'hybrid',
-  adapter: cloudflare()
+  adapter: cloudflare(),
+  vite: {
+    ssr: {
+      noExternal: false
+    }
+  }
 });
