@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Minimapa from "../components/Minimapa.astro";
+import Facebook from "../components/Facebook.astro";
+import Gallery from "../components/Gallery.astro";
+import ChatComponent from "../components/ChatComponent.tsx";
+---
+
+<Layout title="Radio Ieanjesus Perú">
+  <Header />
+  <main class="container mx-auto">
+    <Gallery />
+    <section class="flex justify-around pt-4 flex-col sm:flex-row">
+      <section class="w-full sm:w-1/3 px-4 sm:px-0 h-80 sm:h-[32rem]">
+        <ChatComponent client:only="react" />
+      </section>
+
+      <section class="w-full sm:w-1/3 px-4 sm:px-0">
+        <Minimapa />
+      </section>
+
+      <section class="w-full sm:w-1/3">
+        <Facebook />
+      </section>
+    </section>
+  </main>
+  <footer class="text-center py-5 bg-gray-900 text-white">
+    <p>© Copyright - Radio Ieanjesus Perú</p>
+  </footer>
+</Layout>

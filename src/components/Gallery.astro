@@ -1,0 +1,18 @@
+---
+import GalleryComponent from "./GalleryComponent";
+import { turso } from "../turso";
+import type Imagen from "../interfaces/Imagen";
+
+const { rows } = await turso.execute("SELECT * FROM imagenes");
+
+let imagenes: Imagen[] = rows.map((img: any) => {
+  return {
+    original: img.imagen,
+    thumbnail: img.imagen,
+    originalAlt: "Imagen de galería",
+    thumbnailAlt: "Thumbnail Imagen de galería",
+  };
+});
+---
+
+<GalleryComponent imagenes={imagenes} client:only="react" />

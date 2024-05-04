@@ -1,0 +1,14 @@
+---
+import { turso } from "../turso";
+
+const { rows } = await turso.execute("SELECT * FROM configuracion");
+
+let respuesta = "";
+if (rows.length > 0 && rows[0].servidor != undefined) {
+  respuesta = rows[0].servidor.toString();
+}
+---
+
+<audio autoplay controls src={respuesta}>
+  Your browser does not support the <code>audio</code> element.
+</audio>
