@@ -7,7 +7,7 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'hybrid',
-  adapter: cloudflare({ mode: "directory", nodeCompat: true }),
+  adapter: cloudflare({ mode: "directory" }),
   vite: {
     ssr: {
       target: "node",
