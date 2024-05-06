@@ -3,15 +3,10 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { LibsqlError } from "@libsql/client";
 import { getDatabaseWithUrl } from "firebase-admin/database";
-import { appFirebaseServer } from "src/firebase/server";
-import { turso } from "src/turso";
+import { turso } from "../../turso";
+import { appFirebaseServer } from "../../firebase/server";
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
-
-export const GET: APIRoute = async () => {
-  const { rows } = await turso.execute("SELECT nombre, mensaje, fecha FROM chat ORDER BY fecha DESC LIMIT 20");
-  return new Response(JSON.stringify(rows));
-}
 
 export const POST: APIRoute = async ({ request }) => {
   if (request.headers.get("Content-Type") === "application/json") {

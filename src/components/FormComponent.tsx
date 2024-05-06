@@ -1,3 +1,4 @@
+import React from "react";
 import { useCallback, useRef, type SyntheticEvent } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
@@ -30,7 +31,7 @@ export default function FormComponent() {
   }, [executeRecaptcha]);
 
   const guardar = async (nombre: string, mensaje: string, token: string) => {
-    const response = await fetch("api/chat.json", {
+    const response = await fetch("api/chat.post.json", {
       method: "POST",
       cache: "no-cache",
       headers: {

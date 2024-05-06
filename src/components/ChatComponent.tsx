@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/es';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
@@ -27,7 +27,8 @@ export default function ChatComponent() {
   }, [notify]);
 
   const getMensajes = async () => {
-    const response = await fetch('api/chat.json');
+    const response = await fetch('api/chat.get.json');
+
     const data = await response.json();
     if (data) setMensajes(data);
     resetScroll();

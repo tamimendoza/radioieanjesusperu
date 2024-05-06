@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "target": "ESNext",
     "module": "es2022",
     "moduleResolution": "Node",
@@ -11,6 +13,9 @@
     "types": ["astro/client"],
     "path": {
       "@src/*": ["src/*"],
-    }
+    },
+    "include": [
+      "./.astro/**/*.ts"
+    ]
   }
 }
