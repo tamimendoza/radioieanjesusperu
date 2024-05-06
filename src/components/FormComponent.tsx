@@ -1,4 +1,3 @@
-import React from "react";
 import { useCallback, useRef, type SyntheticEvent } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 

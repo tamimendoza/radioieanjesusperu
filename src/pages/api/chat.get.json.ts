@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { turso } from "../../turso";
+import { turso } from "@src/turso";
 
 export const GET: APIRoute = async () => {
   const { rows } = await turso.execute("SELECT nombre, mensaje, fecha FROM chat ORDER BY fecha DESC LIMIT 20");
