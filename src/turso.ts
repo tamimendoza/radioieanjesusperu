@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import { createClient } from "@libsql/client/web";
 
 const url = import.meta.env.TURSO_DATABASE_URL?.trim();
