@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
-    "@astrojs/cloudflare": "^10.2.5",
+    "@astrojs/cloudflare": "10.2.5",
     "@astrojs/react": "3.3.2",
     "@astrojs/tailwind": "5.1.0",
     "@libsql/client": "0.6.0",
@@ -33,12 +33,12 @@
     "@types/react": "18.2.77",
     "@types/react-dom": "18.2.25",
     "@types/react-image-gallery": "1.2.4",
-    "lightningcss": "^1.24.1",
+    "lightningcss": "1.24.1",
     "prettier": "3.2.5",
     "prettier-plugin-astro": "0.13.0",
-    "wrangler": "^3.53.1"
+    "wrangler": "3.53.1"
   },
   "engines": {
-    "node": ">=18.14.1"
+    "node": ">=18.17.1"
   }
 }

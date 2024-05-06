@@ -22,7 +22,7 @@ export default defineConfig({
     },
     ssr: {
       target: "node",
-      external: ["firebase-admin"]
+      external: ["firebase-admin", "firebase-admin/database"]
     },
     define: {
       'process.env.TURSO_DATABASE_URL': JSON.stringify(process.env.TURSO_DATABASE_URL),
