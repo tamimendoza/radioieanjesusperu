@@ -1,7 +1,6 @@
 export const prerender = false;
 
 import * as firebase from 'firebase-admin'
-import type { ServiceAccount } from "firebase-admin";
 import { getApps } from "firebase-admin/app";
 
 const activeApps = getApps();
@@ -19,7 +18,7 @@ const serviceAccount = {
 };
 
 export const firebaseServer = activeApps.length === 0 ? firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount as ServiceAccount),
+  credential: firebase.credential.cert(serviceAccount as firebase.ServiceAccount),
   databaseURL: import.meta.env.FIREBASE_CLIENT_DATABASE_URL
 }) : activeApps[0];
 
