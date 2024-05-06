@@ -1,11 +1,11 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { getDatabaseWithUrl } from "firebase-admin/database";
 
 import { turso } from "@src/turso";
 import { LibsqlError } from "@libsql/client";
 import { appFirebaseServer } from "@src/firebase/server";
+import { getDatabase } from "firebase-admin/database";
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
 
@@ -20,17 +20,17 @@ export const POST: APIRoute = async ({ request }) => {
       mensaje = body.mensaje;
       token = body.token;
     } catch (error) {
-      return new Response(null, { status: 501, statusText: "No autorizado" });
+      return new Response(null, { status: 400, statusText: "No autorizado" });
     }
 
     if (nombre == null || nombre == undefined || nombre.length == 0) {
-      return new Response(null, { status: 500, statusText: "No autorizado" });
+      return new Response(null, { status: 401, statusText: "No autorizado" });
     }
     if (mensaje == null || mensaje == undefined || mensaje.length == 0) {
-      return new Response(null, { status: 500, statusText: "No autorizado" });
+      return new Response(null, { status: 401, statusText: "No autorizado" });
     }
     if (token == null || token == undefined || token.length == 0) {
-      return new Response(null, { status: 500, statusText: "No autorizado" });
+      return new Response(null, { status: 401, statusText: "No autorizado" });
     }
 
     try {
@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(null, { status: 500, statusText: "Error al guardar chat" });
     }
 
-    const db = getDatabaseWithUrl("https://ieanjesus-peru.firebaseio.com", appFirebaseServer);
+    const db = getDatabase(appFirebaseServer);
     const ref = db.ref('chat');
     ref.update({
       'mensaje': (+new Date()).toString()

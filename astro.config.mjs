@@ -22,12 +22,13 @@ export default defineConfig({
     },
     ssr: {
       target: "node",
-      external: ["firebase-admin", "firebase-admin/database"]
+      external: ["firebase-admin"]
     },
     define: {
       'process.env.TURSO_DATABASE_URL': JSON.stringify(process.env.TURSO_DATABASE_URL),
       'process.env.TURSO_AUTH_TOKEN': JSON.stringify(process.env.TURSO_AUTH_TOKEN),
       'process.env.RECAPTCHA_SECRET': JSON.stringify(process.env.RECAPTCHA_SECRET),
+      'process.env.FIREBASE_CLIENT_DATABASE_URL': JSON.stringify(process.env.FIREBASE_CLIENT_DATABASE_URL),
       'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
       'process.env.FIREBASE_PRIVATE_KEY_ID': JSON.stringify(process.env.FIREBASE_PRIVATE_KEY_ID),
       'process.env.FIREBASE_PRIVATE_KEY': JSON.stringify(process.env.FIREBASE_PRIVATE_KEY),

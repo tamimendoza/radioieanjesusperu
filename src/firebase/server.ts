@@ -14,10 +14,11 @@ const serviceAccount = {
   auth_uri: import.meta.env.FIREBASE_AUTH_URI,
   token_uri: import.meta.env.FIREBASE_TOKEN_URI,
   auth_provider_x509_cert_url: import.meta.env.FIREBASE_AUTH_CERT_URL,
-  client_x509_cert_url: import.meta.env.FIREBASE_CLIENT_CERT_URL,
+  client_x509_cert_url: import.meta.env.FIREBASE_CLIENT_CERT_URL
 };
 
 export const appFirebaseServer = activeApps.length === 0 ? initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
+  databaseURL: import.meta.env.FIREBASE_CLIENT_DATABASE_URL
 }) : activeApps[0];
 
