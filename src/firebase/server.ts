@@ -18,8 +18,7 @@ const serviceAccount = {
   client_x509_cert_url: import.meta.env.FIREBASE_CLIENT_CERT_URL,
 };
 
-const app = activeApps.length === 0 ? initializeApp({
+export const app = activeApps.length === 0 ? initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
 }) : activeApps[0];
 
-export const db = getDatabaseWithUrl("https://ieanjesus-peru.firebaseio.com", app);

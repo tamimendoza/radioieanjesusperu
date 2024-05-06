@@ -3,7 +3,8 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { turso } from "../../turso";
 import { LibsqlError } from "@libsql/client";
-import { db } from "../../firebase/server";
+import { app } from "../../firebase/server";
+import { getDatabaseWithUrl } from "firebase-admin/database";
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
 
@@ -64,6 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(null, { status: 500, statusText: "Error al guardar chat" });
     }
 
+    const db = getDatabaseWithUrl("https://ieanjesus-peru.firebaseio.com", app);
     const ref = db.ref('chat');
     ref.update({
       'mensaje': (+new Date()).toString()
