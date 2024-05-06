@@ -3,9 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "verbatimModuleSyntax": true,
+    "target": "ESNext",
     "module": "es2022",
     "moduleResolution": "Node",
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "types": ["astro/client"],
+    "path": {
+      "@src/*": ["src/*"],
+    }
   }
 }

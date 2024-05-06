@@ -1,8 +1,5 @@
-export const prerender = false;
-
 import type { ServiceAccount } from "firebase-admin";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
-import { getDatabaseWithUrl } from "firebase-admin/database";
 
 const activeApps = getApps();
 const serviceAccount = {
@@ -18,7 +15,7 @@ const serviceAccount = {
   client_x509_cert_url: import.meta.env.FIREBASE_CLIENT_CERT_URL,
 };
 
-export const app = activeApps.length === 0 ? initializeApp({
+export const appFirebaseServer = activeApps.length === 0 ? initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
 }) : activeApps[0];
 
