@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
+
+import FormComponent from './FormComponent';
 import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/es';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import type Mensaje from '../interfaces/Mensaje';
 import { getDatabase, onValue, ref } from 'firebase/database';
-import { app } from '../firebase/client';
-import FormComponent from './FormComponent';
+import { firebaseClient } from '../firebase/client';
+import type Mensaje from '../interfaces/Mensaje';
 
-const db = getDatabase(app);
+const db = getDatabase(firebaseClient);
 const mensajesNuevosRef = ref(db, 'chat/mensaje');
 
 const GOOGLE_RECAPTCHA_KEY = import.meta.env.PUBLIC_GOOGLE_RECAPTCHA_KEY;

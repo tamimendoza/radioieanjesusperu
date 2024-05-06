@@ -17,7 +17,7 @@ const serviceAccount = {
   client_x509_cert_url: import.meta.env.FIREBASE_CLIENT_CERT_URL
 };
 
-export const appFirebaseServer = activeApps.length === 0 ? initializeApp({
+export const firebaseServer = activeApps.length === 0 ? initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
   databaseURL: import.meta.env.FIREBASE_CLIENT_DATABASE_URL
 }) : activeApps[0];

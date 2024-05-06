@@ -4,7 +4,7 @@ import type { APIRoute } from "astro";
 
 import { turso } from "@src/turso";
 import { LibsqlError } from "@libsql/client";
-import { appFirebaseServer } from "@src/firebase/server";
+import { firebaseServer } from "@src/firebase/server";
 import { getDatabase } from "firebase-admin/database";
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(null, { status: 500, statusText: "Error al guardar chat" });
     }
 
-    const db = getDatabase(appFirebaseServer);
+    const db = getDatabase(firebaseServer);
     const ref = db.ref('chat');
     ref.update({
       'mensaje': (+new Date()).toString()
