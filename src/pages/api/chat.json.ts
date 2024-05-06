@@ -5,7 +5,6 @@ import { turso } from "../../turso";
 import { LibsqlError } from "@libsql/client";
 import { db } from "../../firebase/server";
 
-
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
 
 export const GET: APIRoute = async () => {
