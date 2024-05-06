@@ -27,7 +27,7 @@ export default function ChatComponent() {
   }, [notify]);
 
   const getMensajes = async () => {
-    const response = await fetch('api/chat.get.json');
+    const response = await fetch('api/getchat.json');
 
     const data = await response.json();
     if (data) setMensajes(data);

@@ -30,7 +30,7 @@ export default function FormComponent() {
   }, [executeRecaptcha]);
 
   const guardar = async (nombre: string, mensaje: string, token: string) => {
-    const response = await fetch("api/chat.post.json", {
+    const response = await fetch("api/postchat.json", {
       method: "POST",
       cache: "no-cache",
       headers: {
