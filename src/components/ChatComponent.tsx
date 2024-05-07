@@ -4,27 +4,17 @@ import FormComponent from './FormComponent';
 import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/es';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import { getDatabase, onValue, ref } from 'firebase/database';
-import { firebaseClient } from '../firebase/client';
 import type Mensaje from '../interfaces/Mensaje';
-
-const db = getDatabase(firebaseClient);
-const mensajesNuevosRef = ref(db, 'chat/mensaje');
 
 const GOOGLE_RECAPTCHA_KEY = import.meta.env.PUBLIC_GOOGLE_RECAPTCHA_KEY;
 
 export default function ChatComponent() {
-  const [notify, setNotify] = useState<string>("");
   const [mensajes, setMensajes] = useState([]);
   const divChat = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    loadFirebase();
-  }, []);
-
-  useEffect(() => {
     getMensajes();
-  }, [notify]);
+  }, []);
 
   const getMensajes = async () => {
     const response = await fetch('api/chat/get.json');
@@ -38,13 +28,6 @@ export default function ChatComponent() {
     if (divChat.current) {
       divChat.current.scrollTo(0, 0);
     }
-  }
-
-  const loadFirebase = () => {
-    onValue(mensajesNuevosRef, (snapshot) => {
-      const data = snapshot.val();
-      setNotify(data);
-    });
   }
 
   return (

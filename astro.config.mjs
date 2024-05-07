@@ -23,22 +23,12 @@ export default defineConfig({
     ssr: {
       target: "webworker",
       // noExternal: false
-      external: ["firebase-admin", "firebase-admin/app", "firebase-admin/database"]
+      // external: ["firebase-admin", "firebase-admin/app", "firebase-admin/database"]
     },
     define: {
       'process.env.TURSO_DATABASE_URL': JSON.stringify(process.env.TURSO_DATABASE_URL),
       'process.env.TURSO_AUTH_TOKEN': JSON.stringify(process.env.TURSO_AUTH_TOKEN),
       'process.env.RECAPTCHA_SECRET': JSON.stringify(process.env.RECAPTCHA_SECRET),
-      'process.env.FIREBASE_CLIENT_DATABASE_URL': JSON.stringify(process.env.FIREBASE_CLIENT_DATABASE_URL),
-      'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
-      'process.env.FIREBASE_PRIVATE_KEY_ID': JSON.stringify(process.env.FIREBASE_PRIVATE_KEY_ID),
-      'process.env.FIREBASE_PRIVATE_KEY': JSON.stringify(process.env.FIREBASE_PRIVATE_KEY),
-      'process.env.FIREBASE_CLIENT_EMAIL': JSON.stringify(process.env.FIREBASE_CLIENT_EMAIL),
-      'process.env.FIREBASE_CLIENT_ID': JSON.stringify(process.env.FIREBASE_CLIENT_ID),
-      'process.env.FIREBASE_AUTH_URI': JSON.stringify(process.env.FIREBASE_AUTH_URI),
-      'process.env.FIREBASE_TOKEN_URI': JSON.stringify(process.env.FIREBASE_TOKEN_URI),
-      'process.env.FIREBASE_AUTH_CERT_URL': JSON.stringify(process.env.FIREBASE_AUTH_CERT_URL),
-      'process.env.FIREBASE_CLIENT_CERT_URL': JSON.stringify(process.env.FIREBASE_CLIENT_CERT_URL)
     }
   }
 });
