@@ -15,15 +15,19 @@ export default defineConfig({
   },
   integrations: [tailwind(), react()],
   output: 'hybrid',
-  adapter: cloudflare({ mode: "directory" }),
+  adapter: cloudflare({
+    mode: "directory",
+    envPath: true,
+    packagePath: true,
+    wranglerConfigPath: true,
+  }),
   vite: {
     build: {
       cssMinify: "lightningcss",
     },
     ssr: {
       target: "webworker",
-      // noExternal: false
-      external: ["pusher"]
+      external: ['node:crypto'],
     },
     define: {
       'process.env.TURSO_DATABASE_URL': JSON.stringify(process.env.TURSO_DATABASE_URL),
