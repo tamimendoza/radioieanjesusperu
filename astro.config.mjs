@@ -21,7 +21,8 @@ export default defineConfig({
       cssMinify: "lightningcss",
     },
     ssr: {
-      target: "node",
+      target: "webworker",
+      // noExternal: false
       external: ["firebase-admin"]
     },
     define: {

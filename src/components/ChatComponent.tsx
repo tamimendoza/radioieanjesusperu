@@ -20,7 +20,6 @@ export default function ChatComponent() {
 
   useEffect(() => {
     loadFirebase();
-    getMensajes();
   }, []);
 
   useEffect(() => {
