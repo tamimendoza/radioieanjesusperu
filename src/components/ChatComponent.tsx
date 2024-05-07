@@ -5,12 +5,22 @@ import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/es';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import type Mensaje from '../interfaces/Mensaje';
+import pusherJs from 'pusher-js';
 
 const GOOGLE_RECAPTCHA_KEY = import.meta.env.PUBLIC_GOOGLE_RECAPTCHA_KEY;
+const PUSHER_APP_KEY = import.meta.env.PUBLIC_PUSHER_KEY;
+const PUSHER_CLUSTER = import.meta.env.PUBLIC_PUSHER_CLUSTER;
 
 export default function ChatComponent() {
   const [mensajes, setMensajes] = useState([]);
   const divChat = useRef<HTMLDivElement>(null);
+  const pusher = new pusherJs(PUSHER_APP_KEY, {
+    cluster: PUSHER_CLUSTER
+  });
+  const channel = pusher.subscribe('radioieanjesusperu');
+  channel.bind('new-mensaje', function(_data: any) {
+    getMensajes();
+  });
 
   useEffect(() => {
     getMensajes();
