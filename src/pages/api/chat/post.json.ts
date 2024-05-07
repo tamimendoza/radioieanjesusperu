@@ -64,43 +64,45 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(null, { status: 500, statusText: "Error al guardar chat" });
     }
 
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const timestampLimit = 600;
-    const randomTimestamp = Math.floor(Math.random() * timestampLimit);
-    const auth_timestamp = currentTimestamp - randomTimestamp;
-
-    const body = '{"name":"new-mensaje","channels":["radioieanjesusperu"],"data":"{\\"message\\":\\"Hola\\"}"}';
-    const auth_version = '1.0';
-
-    const body_md5 = crypto.createHash("md5").update(body).digest("hex");
-
-    const string_to_sign =
-      "POST\n/apps/" + PUSHER_APP_ID +
-      "/events\nauth_key=" + PUSHER_KEY +
-      "&auth_timestamp=" + auth_timestamp +
-      "&auth_version=" + auth_version +
-      "&body_md5=" + body_md5;
-
-    const auth_signature = crypto.createHmac("sha256", PUSHER_SECRET).update(string_to_sign).digest("hex");
-
-    const apiURL = "http://api-" + PUSHER_CLUSTER + ".pusher.com/apps/" + PUSHER_APP_ID +
-      '/events?auth_key=' + PUSHER_KEY +
-      '&auth_timestamp=' + auth_timestamp +
-      '&auth_version=' + auth_version +
-      '&body_md5=' + body_md5 +
-      '&auth_signature=' + auth_signature;
-
-    const fetchPusher = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: body
-    }
-
     try {
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      const timestampLimit = 600;
+      const randomTimestamp = Math.floor(Math.random() * timestampLimit);
+      const auth_timestamp = currentTimestamp - randomTimestamp;
+
+      const body = '{"name":"new-mensaje","channels":["radioieanjesusperu"],"data":"{\\"message\\":\\"Hola\\"}"}';
+      const auth_version = '1.0';
+
+      console.log()
+      const body_md5 = crypto.createHash("md5").update(body).digest("hex");
+
+      const string_to_sign =
+        "POST\n/apps/" + PUSHER_APP_ID +
+        "/events\nauth_key=" + PUSHER_KEY +
+        "&auth_timestamp=" + auth_timestamp +
+        "&auth_version=" + auth_version +
+        "&body_md5=" + body_md5;
+
+      const auth_signature = crypto.createHmac("sha256", PUSHER_SECRET).update(string_to_sign).digest("hex");
+
+      const apiURL = "http://api-" + PUSHER_CLUSTER + ".pusher.com/apps/" + PUSHER_APP_ID +
+        '/events?auth_key=' + PUSHER_KEY +
+        '&auth_timestamp=' + auth_timestamp +
+        '&auth_version=' + auth_version +
+        '&body_md5=' + body_md5 +
+        '&auth_signature=' + auth_signature;
+
+      const fetchPusher = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: body
+      }
+
       const responseP = await fetch(apiURL, fetchPusher);
-      await responseP.text();
+      const texto = await responseP.text();
+      console.log(texto);
     } catch (error) {
       console.log(error);
     }

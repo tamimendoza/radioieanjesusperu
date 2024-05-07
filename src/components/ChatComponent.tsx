@@ -5,7 +5,7 @@ import moment from 'moment/min/moment-with-locales';
 import 'moment/locale/es';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import type Mensaje from '../interfaces/Mensaje';
-import pusherJs from 'pusher-js';
+import pusherJs, { Channel } from 'pusher-js';
 
 const GOOGLE_RECAPTCHA_KEY = import.meta.env.PUBLIC_GOOGLE_RECAPTCHA_KEY;
 const PUSHER_APP_KEY = import.meta.env.PUBLIC_PUSHER_KEY;
@@ -14,16 +14,27 @@ const PUSHER_CLUSTER = import.meta.env.PUBLIC_PUSHER_CLUSTER;
 export default function ChatComponent() {
   const [mensajes, setMensajes] = useState([]);
   const divChat = useRef<HTMLDivElement>(null);
-  const pusher = new pusherJs(PUSHER_APP_KEY, {
-    cluster: PUSHER_CLUSTER
-  });
-  const channel = pusher.subscribe('radioieanjesusperu');
-  channel.bind('new-mensaje', function(_data: any) {
-    getMensajes();
-  });
+  const pusher = useRef<pusherJs | null>(null);
+  const channel = useRef<Channel | null>(null);
 
   useEffect(() => {
     getMensajes();
+    pusher.current = new pusherJs(PUSHER_APP_KEY, {
+      cluster: PUSHER_CLUSTER
+    });
+    channel.current = pusher.current.subscribe('radioieanjesusperu');
+    const handleNewMensaje = (_data: any) => {
+      getMensajes();
+    };
+    channel.current.bind('new-mensaje', handleNewMensaje);
+
+    return () => {
+      if (channel.current) {
+        channel.current.unbind();
+        pusher.current?.unsubscribe('radioieanjesusperu');
+      }
+      pusher.current?.disconnect();
+    };
   }, []);
 
   const getMensajes = async () => {
