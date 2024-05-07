@@ -100,9 +100,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     try {
       const responseP = await fetch(apiURL, fetchPusher);
-      console.log(responseP.status);
-      const texto = await responseP.text();
-      console.log(texto);
+      await responseP.text();
     } catch (error) {
       console.log(error);
     }

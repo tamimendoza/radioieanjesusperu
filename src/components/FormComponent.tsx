@@ -42,7 +42,9 @@ export default function FormComponent() {
         token
       })
     });
-    return response.json();
+    if (response.ok) {
+      await response.json();
+    }
   }
 
   return (
