@@ -37,17 +37,16 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     try {
-      const paramsRecaptcha = new URLSearchParams();
-      paramsRecaptcha.append("secret", RECAPTCHA_SECRET);
-      paramsRecaptcha.append("response", token);
-
       const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
         method: "POST",
-        body: paramsRecaptcha
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `secret=${RECAPTCHA_SECRET}&response=${token}`,
       });
       const data = await response.json();
       if (data.success == false) {
-        return new Response(null, { status: 500, statusText: "No autorizado" });
+        return new Response(null, { status: 500, statusText: "No autorizado." });
       }
     } catch (error) {
       console.error(error);
@@ -73,7 +72,6 @@ export const POST: APIRoute = async ({ request }) => {
       const body = '{"name":"new-mensaje","channels":["radioieanjesusperu"],"data":"{\\"message\\":\\"Hola\\"}"}';
       const auth_version = '1.0';
 
-      console.log()
       const body_md5 = crypto.createHash("md5").update(body).digest("hex");
 
       const string_to_sign =
@@ -92,17 +90,14 @@ export const POST: APIRoute = async ({ request }) => {
         '&body_md5=' + body_md5 +
         '&auth_signature=' + auth_signature;
 
-      const fetchPusher = {
+      const responseP = await fetch(apiURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: body
-      }
-
-      const responseP = await fetch(apiURL, fetchPusher);
-      const texto = await responseP.text();
-      console.log(texto);
+      });
+      await responseP.text();
     } catch (error) {
       console.log(error);
     }
