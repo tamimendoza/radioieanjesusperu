@@ -4,8 +4,13 @@ import type { APIRoute } from "astro";
 
 import { turso } from "@src/turso";
 import { LibsqlError } from "@libsql/client";
+import Pusher from "pusher";
 
 const RECAPTCHA_SECRET = import.meta.env.RECAPTCHA_SECRET;
+const PUSHER_APP_ID = import.meta.env.PUSHER_APP_ID;
+const PUSHER_KEY = import.meta.env.PUBLIC_PUSHER_KEY;
+const PUSHER_SECRET = import.meta.env.PUSHER_SECRET;
+const PUSHER_CLUSTER = import.meta.env.PUBLIC_PUSHER_CLUSTER;
 
 export const POST: APIRoute = async ({ request }) => {
   if (request.headers.get("Content-Type") === "application/json") {
@@ -58,6 +63,16 @@ export const POST: APIRoute = async ({ request }) => {
 
       return new Response(null, { status: 500, statusText: "Error al guardar chat" });
     }
+
+    const pusher = new Pusher({
+      appId: PUSHER_APP_ID,
+      key: PUSHER_KEY,
+      secret: PUSHER_SECRET,
+      cluster: PUSHER_CLUSTER,
+      useTLS: true
+    });
+
+    pusher.trigger('radioieanjesusperu', 'new-mensaje', { message: (+new Date()).toString() })
 
     return new Response(JSON.stringify({
       message: "OK"
